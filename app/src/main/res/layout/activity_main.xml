@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="me.zoro.dispatchevent.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical">
+
+        <me.zoro.dispatchevent.view.FirstLayout
+            android:id="@+id/firstLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ff0000"
+            android:padding="20dp">
+
+            <me.zoro.dispatchevent.view.SecondLayout
+                android:id="@+id/secondLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00ff00"
+                android:padding="20dp">
+
+                <me.zoro.dispatchevent.view.ThirdLayout
+                    android:id="@+id/thirdLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#0000ff"
+                    android:padding="20dp">
+
+                    <me.zoro.dispatchevent.view.LastView
+                        android:id="@+id/lastView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#ffffff" />
+                </me.zoro.dispatchevent.view.ThirdLayout>
+
+            </me.zoro.dispatchevent.view.SecondLayout>
+
+        </me.zoro.dispatchevent.view.FirstLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FirstLayout" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/firstLayoutDispatch"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="dispatch" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/firstLayoutIntercept"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="onIntercept" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/firstLayoutTouch"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="onTouch" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SecondLayout" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/secondLayoutDispatch"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="dispatch" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/secondLayoutIntercept"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="onIntercept" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/secondLayoutTouch"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="onTouch" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ThirdLayout" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/thirdLayoutDispatch"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="dispatch" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/thirdLayoutIntercept"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="onIntercept" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/thirdLayoutTouch"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="onTouch" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LastView" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/lastViewDispatch"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="dispatch" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/lastViewIntercept"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="onIntercept"
+                    android:visibility="invisible" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/lastViewTouch"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="onTouch" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnClean"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Clean" />
+
+            <TextView
+                android:id="@+id/textLog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+
+
