@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="120dp"
         android:orientation="vertical">
 
         <me.zoro.dispatchevent.view.FirstLayout
@@ -17,28 +17,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#ff0000"
-            android:padding="20dp">
+            android:padding="10dp">
 
             <me.zoro.dispatchevent.view.SecondLayout
                 android:id="@+id/secondLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#00ff00"
-                android:padding="20dp">
+                android:padding="10dp">
 
-                <me.zoro.dispatchevent.view.ThirdLayout
-                    android:id="@+id/thirdLayout"
+
+                <me.zoro.dispatchevent.view.LastView
+                    android:id="@+id/lastView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#0000ff"
-                    android:padding="20dp">
-
-                    <me.zoro.dispatchevent.view.LastView
-                        android:id="@+id/lastView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#ffffff" />
-                </me.zoro.dispatchevent.view.ThirdLayout>
+                    android:background="#ffffff" />
 
             </me.zoro.dispatchevent.view.SecondLayout>
 
@@ -61,36 +54,87 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Activity" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="0dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="dispatchTouchEvent" />
+
+                <me.zoro.dispatchevent.view.DispatchSwitch
+                    android:id="@+id/switchActivityDispatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="onTouchEvent" />
+
+                <me.zoro.dispatchevent.view.DispatchSwitch
+                    android:id="@+id/switchActivityTouch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="FirstLayout" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:paddingLeft="0dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="dispatchTouchEvent" />
 
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/firstLayoutDispatch"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="dispatch" />
+                <me.zoro.dispatchevent.view.DispatchSwitch
+                    android:id="@+id/switchFirstDispatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/firstLayoutIntercept"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="onIntercept" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="onInterceptTouchEvent" />
 
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/firstLayoutTouch"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="onTouch" />
+                <me.zoro.dispatchevent.view.DispatchSwitch
+                    android:id="@+id/switchFirstIntercept"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="onTouchEvent" />
+
+                <me.zoro.dispatchevent.view.DispatchSwitch
+                    android:id="@+id/switchFirstTouch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorAccent" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -100,65 +144,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:paddingLeft="0dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="dispatchTouchEvent" />
 
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/secondLayoutDispatch"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="dispatch" />
+                <me.zoro.dispatchevent.view.DispatchSwitch
+                    android:id="@+id/switchSecondDispatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/secondLayoutIntercept"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="onIntercept" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="onInterceptTouchEvent" />
 
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/secondLayoutTouch"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="onTouch" />
+                <me.zoro.dispatchevent.view.DispatchSwitch
+                    android:id="@+id/switchSecondIntercept"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="onTouchEvent" />
+
+                <me.zoro.dispatchevent.view.DispatchSwitch
+                    android:id="@+id/switchSecondTouch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
-            <TextView
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ThirdLayout" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/thirdLayoutDispatch"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="dispatch" />
-
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/thirdLayoutIntercept"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="onIntercept" />
-
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/thirdLayoutTouch"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="onTouch" />
-
-            </LinearLayout>
+                android:layout_height="1px"
+                android:background="@color/colorAccent" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -168,32 +191,34 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:paddingLeft="0dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="dispatchTouchEvent" />
 
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/lastViewDispatch"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="dispatch" />
+                <me.zoro.dispatchevent.view.DispatchSwitch
+                    android:id="@+id/switchLastDispatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/lastViewIntercept"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="onIntercept"
-                    android:visibility="invisible" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="onTouchEvent" />
 
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/lastViewTouch"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="onTouch" />
-
+                <me.zoro.dispatchevent.view.DispatchSwitch
+                    android:id="@+id/switchLastTouch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorAccent" />
 
             <Button
                 android:id="@+id/btnClean"

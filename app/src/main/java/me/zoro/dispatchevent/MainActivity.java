@@ -2,19 +2,18 @@ package me.zoro.dispatchevent;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SwitchCompat;
-import android.widget.CompoundButton;
+import android.view.MotionEvent;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import me.zoro.dispatchevent.spref.Setting;
+import me.zoro.dispatchevent.utils.MyUtils;
+import me.zoro.dispatchevent.view.DispatchSwitch;
 import me.zoro.dispatchevent.view.FirstLayout;
 import me.zoro.dispatchevent.view.LastView;
 import me.zoro.dispatchevent.view.SecondLayout;
-import me.zoro.dispatchevent.view.ThirdLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,64 +21,126 @@ public class MainActivity extends AppCompatActivity {
     FirstLayout firstLayout;
     @BindView(R.id.secondLayout)
     SecondLayout secondLayout;
-    @BindView(R.id.thirdLayout)
-    ThirdLayout thirdLayout;
     @BindView(R.id.lastView)
     LastView lastView;
     @BindView(R.id.textLog)
     TextView textLog;
 
-    @BindView(R.id.firstLayoutDispatch)
-    SwitchCompat firstLayoutDispatch;
-    @BindView(R.id.firstLayoutIntercept)
-    SwitchCompat firstLayoutIntercept;
-    @BindView(R.id.firstLayoutTouch)
-    SwitchCompat firstLayoutTouch;
+    //Activity
+    @BindView(R.id.switchActivityDispatch)
+    DispatchSwitch switchActivityDispatch;
+    @BindView(R.id.switchActivityTouch)
+    DispatchSwitch switchActivityTouch;
 
-    @BindView(R.id.secondLayoutDispatch)
-    SwitchCompat secondLayoutDispatch;
-    @BindView(R.id.secondLayoutIntercept)
-    SwitchCompat secondLayoutIntercept;
-    @BindView(R.id.secondLayoutTouch)
-    SwitchCompat secondLayoutTouch;
+    //FirstLayout
+    @BindView(R.id.switchFirstDispatch)
+    DispatchSwitch switchFirstDispatch;
+    @BindView(R.id.switchFirstIntercept)
+    DispatchSwitch switchFirstIntercept;
+    @BindView(R.id.switchFirstTouch)
+    DispatchSwitch switchFirstTouch;
 
-    @BindView(R.id.thirdLayoutDispatch)
-    SwitchCompat thirdLayoutDispatch;
-    @BindView(R.id.thirdLayoutIntercept)
-    SwitchCompat thirdLayoutIntercept;
-    @BindView(R.id.thirdLayoutTouch)
-    SwitchCompat thirdLayoutTouch;
+    //SecondLayout
+    @BindView(R.id.switchSecondDispatch)
+    DispatchSwitch switchSecondDispatch;
+    @BindView(R.id.switchSecondIntercept)
+    DispatchSwitch switchSecondIntercept;
+    @BindView(R.id.switchSecondTouch)
+    DispatchSwitch switchSecondTouch;
 
-    @BindView(R.id.lastViewDispatch)
-    SwitchCompat lastViewDispatch;
-    @BindView(R.id.lastViewIntercept)
-    SwitchCompat lastViewIntercept;
-    @BindView(R.id.lastViewTouch)
-    SwitchCompat lastViewTouch;
+    //LastView
+    @BindView(R.id.switchLastDispatch)
+    DispatchSwitch switchLastDispatch;
+    @BindView(R.id.switchLastTouch)
+    DispatchSwitch switchLastTouch;
+
+    ILogListener logListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        initWidgets();
+    }
 
-        firstLayoutDispatch.setChecked(Setting.getInstance().getBoolean(Setting.KEY_FIRST_LAYOUT_DISPATCH, false));
-        firstLayoutIntercept.setChecked(Setting.getInstance().getBoolean(Setting.KEY_FIRST_LAYOUT_INTERCEPT, false));
-        firstLayoutTouch.setChecked(Setting.getInstance().getBoolean(Setting.KEY_FIRST_LAYOUT_TOUCH, false));
+    private void initWidgets() {
 
-        secondLayoutDispatch.setChecked(Setting.getInstance().getBoolean(Setting.KEY_SECOND_LAYOUT_DISPATCH, false));
-        secondLayoutIntercept.setChecked(Setting.getInstance().getBoolean(Setting.KEY_SECOND_LAYOUT_INTERCEPT, false));
-        secondLayoutTouch.setChecked(Setting.getInstance().getBoolean(Setting.KEY_SECOND_LAYOUT_TOUCH, false));
+        switchActivityDispatch.setSelectedState(Setting.getInstance().getInt(Setting.KEY_ACTIVITY_LAYOUT_DISPATCH, DispatchSwitch.STATE_OR_INDEX_SUPER));
+        switchActivityTouch.setSelectedState(Setting.getInstance().getInt(Setting.KEY_ACTIVITY_LAYOUT_TOUCH, DispatchSwitch.STATE_OR_INDEX_SUPER));
 
-        thirdLayoutDispatch.setChecked(Setting.getInstance().getBoolean(Setting.KEY_THIRD_LAYOUT_DISPATCH, false));
-        thirdLayoutIntercept.setChecked(Setting.getInstance().getBoolean(Setting.KEY_THIRD_LAYOUT_INTERCEPT, false));
-        thirdLayoutTouch.setChecked(Setting.getInstance().getBoolean(Setting.KEY_THIRD_LAYOUT_TOUCH, false));
+        switchFirstDispatch.setSelectedState(Setting.getInstance().getInt(Setting.KEY_FIRST_LAYOUT_DISPATCH, DispatchSwitch.STATE_OR_INDEX_SUPER));
+        switchFirstIntercept.setSelectedState(Setting.getInstance().getInt(Setting.KEY_FIRST_LAYOUT_INTERCEPT, DispatchSwitch.STATE_OR_INDEX_SUPER));
+        switchFirstTouch.setSelectedState(Setting.getInstance().getInt(Setting.KEY_FIRST_LAYOUT_TOUCH, DispatchSwitch.STATE_OR_INDEX_SUPER));
 
-        lastViewDispatch.setChecked(Setting.getInstance().getBoolean(Setting.KEY_LAST_VIEW_DISPATCH, false));
-        lastViewIntercept.setChecked(Setting.getInstance().getBoolean(Setting.KEY_LAST_VIEW_INTERCEPT, false));
-        lastViewTouch.setChecked(Setting.getInstance().getBoolean(Setting.KEY_LAST_VIEW_TOUCH, false));
 
-        ILogListener logListener = new ILogListener() {
+        switchSecondDispatch.setSelectedState(Setting.getInstance().getInt(Setting.KEY_SECOND_LAYOUT_DISPATCH, DispatchSwitch.STATE_OR_INDEX_SUPER));
+        switchSecondIntercept.setSelectedState(Setting.getInstance().getInt(Setting.KEY_SECOND_LAYOUT_INTERCEPT, DispatchSwitch.STATE_OR_INDEX_SUPER));
+        switchSecondTouch.setSelectedState(Setting.getInstance().getInt(Setting.KEY_SECOND_LAYOUT_TOUCH, DispatchSwitch.STATE_OR_INDEX_SUPER));
+
+        switchLastDispatch.setSelectedState(Setting.getInstance().getInt(Setting.KEY_LAST_VIEW_DISPATCH, DispatchSwitch.STATE_OR_INDEX_SUPER));
+        switchLastTouch.setSelectedState(Setting.getInstance().getInt(Setting.KEY_LAST_VIEW_TOUCH, DispatchSwitch.STATE_OR_INDEX_SUPER));
+
+        DispatchSwitch.OnDispatchStateChangeListener dispatchStateChangeListener = new DispatchSwitch.OnDispatchStateChangeListener() {
+            @Override
+            public void onCheckedChanged(DispatchSwitch view, int checkedIndex) {
+                String key = null;
+                switch (view.getId()) {
+                    case R.id.switchActivityDispatch:
+                        key = Setting.KEY_ACTIVITY_LAYOUT_DISPATCH;
+                        break;
+                    case R.id.switchActivityTouch:
+                        key = Setting.KEY_LAST_VIEW_TOUCH;
+                        break;
+                    case R.id.switchFirstDispatch:
+                        key = Setting.KEY_FIRST_LAYOUT_DISPATCH;
+                        break;
+                    case R.id.switchFirstIntercept:
+                        key = Setting.KEY_FIRST_LAYOUT_INTERCEPT;
+                        break;
+                    case R.id.switchFirstTouch:
+                        key = Setting.KEY_FIRST_LAYOUT_TOUCH;
+                        break;
+                    case R.id.switchSecondDispatch:
+                        key = Setting.KEY_SECOND_LAYOUT_DISPATCH;
+                        break;
+                    case R.id.switchSecondIntercept:
+                        key = Setting.KEY_SECOND_LAYOUT_INTERCEPT;
+                        break;
+                    case R.id.switchSecondTouch:
+                        key = Setting.KEY_SECOND_LAYOUT_TOUCH;
+                        break;
+                    case R.id.switchLastDispatch:
+                        key = Setting.KEY_LAST_VIEW_DISPATCH;
+                        break;
+                    case R.id.switchLastTouch:
+                        key = Setting.KEY_LAST_VIEW_TOUCH;
+                        break;
+                    default:
+                        key = null;
+                }
+                if (key != null) {
+                    Setting.getInstance().putInt(key, checkedIndex);
+                }
+            }
+        };
+
+        switchActivityDispatch.setListener(dispatchStateChangeListener);
+        switchActivityTouch.setListener(dispatchStateChangeListener);
+
+        switchFirstDispatch.setListener(dispatchStateChangeListener);
+        switchFirstIntercept.setListener(dispatchStateChangeListener);
+        switchFirstTouch.setListener(dispatchStateChangeListener);
+
+        switchSecondDispatch.setListener(dispatchStateChangeListener);
+        switchSecondIntercept.setListener(dispatchStateChangeListener);
+        switchSecondTouch.setListener(dispatchStateChangeListener);
+
+        switchLastDispatch.setListener(dispatchStateChangeListener);
+        switchLastTouch.setListener(dispatchStateChangeListener);
+
+        logListener = new ILogListener() {
             @Override
             public void log(String info) {
                 textLog.append("\n" + info);
@@ -87,85 +148,69 @@ public class MainActivity extends AppCompatActivity {
         };
         firstLayout.setLogListener(logListener);
         secondLayout.setLogListener(logListener);
-        thirdLayout.setLogListener(logListener);
         lastView.setLogListener(logListener);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        boolean result;
+        if (isInFirstLayout(ev)) {
+            String info = "MainActivity.dispatchTouchEvent " + MyUtils.motionEventName(ev);
+            logListener.log(info);
+        }
+        switch (Setting.getInstance().getInt(Setting.KEY_ACTIVITY_LAYOUT_DISPATCH, DispatchSwitch.STATE_OR_INDEX_SUPER)) {
+            case DispatchSwitch.STATE_OR_INDEX_TRUE:
+                result = true;
+                break;
+            case DispatchSwitch.STATE_OR_INDEX_FALSE:
+                result = false;
+                break;
+            case DispatchSwitch.STATE_OR_INDEX_SUPER:
+            default:
+                result = super.dispatchTouchEvent(ev);
+                break;
+        }
+        return result;
+    }
+
+    private boolean isInFirstLayout(MotionEvent ev) {
+        int x = (int) ev.getRawX();
+        int y = (int) ev.getRawY();
+        int[] location = new int[2];
+        firstLayout.getLocationOnScreen(location);
+        int width = firstLayout.getWidth();
+        int height = firstLayout.getHeight();
+        if (location[0] < x && x < location[0] + width && location[1] < y && y < location[1] + height) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        boolean result;
+        if (isInFirstLayout(event)) {
+            String info = "MainActivity.onTouchEvent " + MyUtils.motionEventName(event);
+            logListener.log(info);
+        }
+        switch (Setting.getInstance().getInt(Setting.KEY_ACTIVITY_LAYOUT_TOUCH, DispatchSwitch.STATE_OR_INDEX_SUPER)) {
+            case DispatchSwitch.STATE_OR_INDEX_TRUE:
+                result = true;
+                break;
+            case DispatchSwitch.STATE_OR_INDEX_FALSE:
+                result = false;
+                break;
+            case DispatchSwitch.STATE_OR_INDEX_SUPER:
+            default:
+                result = super.onTouchEvent(event);
+                break;
+        }
+        return result;
     }
 
     @OnClick(R.id.btnClean)
     public void clean() {
         textLog.setText("");
-    }
-
-    /*******
-     * first
-     ********/
-    @OnCheckedChanged(R.id.firstLayoutDispatch)
-    public void onFirstLayoutDispatch(boolean isChecked) {
-        Setting.getInstance().putBoolean(Setting.KEY_FIRST_LAYOUT_DISPATCH, isChecked);
-    }
-
-    @OnCheckedChanged(R.id.firstLayoutIntercept)
-    public void onFirstLayoutIntercept(boolean isChecked) {
-        Setting.getInstance().putBoolean(Setting.KEY_FIRST_LAYOUT_INTERCEPT, isChecked);
-    }
-
-    @OnCheckedChanged(R.id.firstLayoutTouch)
-    public void onFirstLayoutTouch(boolean isChecked) {
-        Setting.getInstance().putBoolean(Setting.KEY_FIRST_LAYOUT_TOUCH, isChecked);
-    }
-
-    /*******
-     * second
-     ********/
-    @OnCheckedChanged(R.id.secondLayoutDispatch)
-    public void onSecondLayoutDispatch(boolean isChecked) {
-        Setting.getInstance().putBoolean(Setting.KEY_SECOND_LAYOUT_DISPATCH, isChecked);
-    }
-
-    @OnCheckedChanged(R.id.secondLayoutIntercept)
-    public void onSecondLayoutIntercept(boolean isChecked) {
-        Setting.getInstance().putBoolean(Setting.KEY_SECOND_LAYOUT_INTERCEPT, isChecked);
-    }
-
-    @OnCheckedChanged(R.id.secondLayoutTouch)
-    public void onSecondLayoutTouch(boolean isChecked) {
-        Setting.getInstance().putBoolean(Setting.KEY_SECOND_LAYOUT_TOUCH, isChecked);
-    }
-
-    /*******
-     * third
-     ********/
-    @OnCheckedChanged(R.id.thirdLayoutDispatch)
-    public void onThirdLayoutDispatch(boolean isChecked) {
-        Setting.getInstance().putBoolean(Setting.KEY_THIRD_LAYOUT_DISPATCH, isChecked);
-    }
-
-    @OnCheckedChanged(R.id.thirdLayoutIntercept)
-    public void onThirdLayoutIntercept(boolean isChecked) {
-        Setting.getInstance().putBoolean(Setting.KEY_THIRD_LAYOUT_INTERCEPT, isChecked);
-    }
-
-    @OnCheckedChanged(R.id.thirdLayoutTouch)
-    public void onThirdLayoutTouch(boolean isChecked) {
-        Setting.getInstance().putBoolean(Setting.KEY_THIRD_LAYOUT_TOUCH, isChecked);
-    }
-
-    /*******
-     * last
-     ********/
-    @OnCheckedChanged(R.id.lastViewDispatch)
-    public void onLastViewDispatch(boolean isChecked) {
-        Setting.getInstance().putBoolean(Setting.KEY_LAST_VIEW_DISPATCH, isChecked);
-    }
-
-    @OnCheckedChanged(R.id.lastViewIntercept)
-    public void onLastViewIntercept(boolean isChecked) {
-        Setting.getInstance().putBoolean(Setting.KEY_LAST_VIEW_INTERCEPT, isChecked);
-    }
-
-    @OnCheckedChanged(R.id.lastViewTouch)
-    public void onLastViewTouch(boolean isChecked) {
-        Setting.getInstance().putBoolean(Setting.KEY_LAST_VIEW_TOUCH, isChecked);
     }
 
 

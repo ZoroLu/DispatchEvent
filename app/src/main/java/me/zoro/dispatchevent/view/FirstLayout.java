@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 
 import me.zoro.dispatchevent.ILogListener;
 import me.zoro.dispatchevent.spref.Setting;
+import me.zoro.dispatchevent.utils.MyUtils;
 
 /**
  * Created by luguanquan on 2016/10/17.
@@ -34,34 +35,63 @@ public class FirstLayout extends FrameLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        boolean result = Setting.getInstance().getBoolean(Setting.KEY_FIRST_LAYOUT_TOUCH, false);
-        if(logListener != null){
-            logListener.log("FirstLayout.onTouchEvent " + result);
+        String info = "FirstLayout.onTouchEvent " + MyUtils.motionEventName(event);
+        logListener.log(info);
+        boolean result;
+        switch (Setting.getInstance().getInt(Setting.KEY_FIRST_LAYOUT_TOUCH, DispatchSwitch.STATE_OR_INDEX_SUPER)) {
+            case DispatchSwitch.STATE_OR_INDEX_TRUE:
+                result = true;
+                break;
+            case DispatchSwitch.STATE_OR_INDEX_FALSE:
+                result = false;
+                break;
+            case DispatchSwitch.STATE_OR_INDEX_SUPER:
+            default:
+                result = super.onTouchEvent(event);
+                break;
         }
-        System.out.println("FirstLayout.onTouchEvent " + result);
-        super.onTouchEvent(event);
         return result;
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        boolean result = Setting.getInstance().getBoolean(Setting.KEY_FIRST_LAYOUT_INTERCEPT, false);
-        if(logListener != null){
-            logListener.log("FirstLayout.onInterceptTouchEvent " + result);
+        String info = "FirstLayout.onInterceptTouchEvent " + MyUtils.motionEventName(ev);
+        logListener.log(info);
+        boolean result;
+        switch (Setting.getInstance().getInt(Setting.KEY_FIRST_LAYOUT_INTERCEPT, DispatchSwitch.STATE_OR_INDEX_SUPER)) {
+            case DispatchSwitch.STATE_OR_INDEX_TRUE:
+                result = true;
+                break;
+            case DispatchSwitch.STATE_OR_INDEX_FALSE:
+                result = false;
+                break;
+            case DispatchSwitch.STATE_OR_INDEX_SUPER:
+            default:
+                result = super.onInterceptTouchEvent(ev);
+                break;
         }
-        System.out.println("FirstLayout.onInterceptTouchEvent " + result);
-        super.onInterceptTouchEvent(ev);
         return result;
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        boolean result = Setting.getInstance().getBoolean(Setting.KEY_FIRST_LAYOUT_DISPATCH, false);
-        if(logListener != null){
-            logListener.log("FirstLayout.dispatchTouchEvent " + result);
+        String info = "FirstLayout.dispatchTouchEvent " + MyUtils.motionEventName(ev);
+        logListener.log(info);
+        boolean result;
+        switch (Setting.getInstance().getInt(Setting.KEY_FIRST_LAYOUT_DISPATCH, DispatchSwitch.STATE_OR_INDEX_SUPER)) {
+            case DispatchSwitch.STATE_OR_INDEX_TRUE:
+                result = true;
+                break;
+            case DispatchSwitch.STATE_OR_INDEX_FALSE:
+                result = false;
+                break;
+            case DispatchSwitch.STATE_OR_INDEX_SUPER:
+            default:
+                result = super.dispatchTouchEvent(ev);
+                break;
         }
-        System.out.println("FirstLayout.dispatchTouchEvent " + result);
-        super.dispatchTouchEvent(ev);
         return result;
     }
+
+
 }
