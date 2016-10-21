@@ -153,24 +153,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        boolean result;
         if (isInFirstLayout(ev)) {
+            boolean result;
             String info = "MainActivity.dispatchTouchEvent " + MyUtils.motionEventName(ev);
             logListener.log(info);
+            switch (Setting.getInstance().getInt(Setting.KEY_ACTIVITY_LAYOUT_DISPATCH, DispatchSwitch.STATE_OR_INDEX_SUPER)) {
+                case DispatchSwitch.STATE_OR_INDEX_TRUE:
+                    result = true;
+                    break;
+                case DispatchSwitch.STATE_OR_INDEX_FALSE:
+                    result = false;
+                    break;
+                case DispatchSwitch.STATE_OR_INDEX_SUPER:
+                default:
+                    result = super.dispatchTouchEvent(ev);
+                    break;
+            }
+            return result;
         }
-        switch (Setting.getInstance().getInt(Setting.KEY_ACTIVITY_LAYOUT_DISPATCH, DispatchSwitch.STATE_OR_INDEX_SUPER)) {
-            case DispatchSwitch.STATE_OR_INDEX_TRUE:
-                result = true;
-                break;
-            case DispatchSwitch.STATE_OR_INDEX_FALSE:
-                result = false;
-                break;
-            case DispatchSwitch.STATE_OR_INDEX_SUPER:
-            default:
-                result = super.dispatchTouchEvent(ev);
-                break;
-        }
-        return result;
+        return super.dispatchTouchEvent(ev);
     }
 
     private boolean isInFirstLayout(MotionEvent ev) {
@@ -188,24 +189,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        boolean result;
         if (isInFirstLayout(event)) {
+            boolean result;
             String info = "MainActivity.onTouchEvent " + MyUtils.motionEventName(event);
             logListener.log(info);
+            switch (Setting.getInstance().getInt(Setting.KEY_ACTIVITY_LAYOUT_TOUCH, DispatchSwitch.STATE_OR_INDEX_SUPER)) {
+                case DispatchSwitch.STATE_OR_INDEX_TRUE:
+                    result = true;
+                    break;
+                case DispatchSwitch.STATE_OR_INDEX_FALSE:
+                    result = false;
+                    break;
+                case DispatchSwitch.STATE_OR_INDEX_SUPER:
+                default:
+                    result = super.onTouchEvent(event);
+                    break;
+            }
+            return result;
         }
-        switch (Setting.getInstance().getInt(Setting.KEY_ACTIVITY_LAYOUT_TOUCH, DispatchSwitch.STATE_OR_INDEX_SUPER)) {
-            case DispatchSwitch.STATE_OR_INDEX_TRUE:
-                result = true;
-                break;
-            case DispatchSwitch.STATE_OR_INDEX_FALSE:
-                result = false;
-                break;
-            case DispatchSwitch.STATE_OR_INDEX_SUPER:
-            default:
-                result = super.onTouchEvent(event);
-                break;
-        }
-        return result;
+        return super.onTouchEvent(event);
     }
 
     @OnClick(R.id.btnClean)
