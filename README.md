@@ -4,4 +4,4 @@ You can set the return of dispatchTouchEvent(),onInterceptTouchEvent(),onTouchEv
 
 ScreenShot
 ===
-![](https://github.com/ZoroLu/DispatchEvent/blob/master/art/WechatIMG4.jpeg?raw=true)
+![](https://github.com/ZoroLu/DispatchEvent/blob/master/art/WechatIMG11.jpeg?raw=true)
