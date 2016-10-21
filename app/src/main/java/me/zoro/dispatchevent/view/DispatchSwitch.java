@@ -84,14 +84,16 @@ public class DispatchSwitch extends FrameLayout {
     public void setSelectedState(int index) {
         switch (index) {
             case STATE_OR_INDEX_TRUE:
-                radioTrue.setChecked(true);
+                radioGroup.check(R.id.radioTrue);
                 break;
             case STATE_OR_INDEX_FALSE:
-                radioFalse.setChecked(true);
+                radioGroup.check(R.id.radioFalse);
                 break;
             case STATE_OR_INDEX_SUPER:
-                radioSuper.setChecked(true);
+                radioGroup.check(R.id.radioSuper);
+                break;
             default:
+                break;
         }
     }
 }
